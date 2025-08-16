@@ -1,5 +1,6 @@
-import { Component, computed, input, Input, signal } from '@angular/core';
+import { Component, computed, input, Input, Output, signal } from '@angular/core';
 import { DUMMY_USERS } from '../dummy-users';
+import { EventEmitter } from '@angular/core';
 
 const randomIndex = Math.floor(Math.random() * DUMMY_USERS.length);
 
@@ -10,18 +11,16 @@ const randomIndex = Math.floor(Math.random() * DUMMY_USERS.length);
   styleUrl: './user.css'
 })
 export class User {
-  // @Input({required : true}) avatar!: string;
-  // @Input({required : true}) name!: string;
+  @Input({required : true}) id!: string;
+  @Input({required : true}) avatar!: string;
+  @Input({required : true}) name!: string;
+  @Output() select = new EventEmitter();
 
-  avatar = input.required<string>();  // we can take input using signal's input method, we cannot assign a default value when we use required(input<string>(''))
-  name = input.required<string>();
-  // also input function of signal are readonly so we cannot reassign within the same component them as we did using the set method
-
-  imagePath = computed(() => 'Users/' + this.avatar());
-  // get imagePath() {
-  //   return 'Users/' + this.avatar;
-  // } 
+  get imagePath() {
+    return 'Users/' + this.avatar;
+  } 
 
   onSelectedUser(){
+    this.select.emit(this.id);
   }
 }
