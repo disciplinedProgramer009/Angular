@@ -14,12 +14,15 @@ import { Tasks } from "./tasks/tasks";
 export class App {
   protected readonly title = signal('first-angular-app');
   user = DUMMY_USERS;
-  selectedUserName: string = 'Please select a valid user';
+  // selectedUserName: string = 'Please select a valid user';
+  selectedUserId? : string;
+
+  get selectedUser(){
+    return this.user.find(user => user.id === this.selectedUserId);
+  }
 
   onSelectUser(id: string) {
-    const userSelected = this.user.find(user => user.id === id);
-    if (userSelected) {
-      this.selectedUserName = userSelected.name;
-    } 
+    // const userSelected = this.user.find(user => user.id === id);
+    this.selectedUserId = id;
   }
 }
