@@ -2,11 +2,13 @@ import { Component, computed, input, Input, output, Output, signal } from '@angu
 import { DUMMY_USERS } from '../dummy-users';
 import { EventEmitter } from '@angular/core';
 
+import { type UserType } from './user.model';
+
 const randomIndex = Math.floor(Math.random() * DUMMY_USERS.length);
 
 // type UserType = { id: string; avatar: string; name: string };
 
-interface UserType { id: string; avatar: string; name: string }
+
 
 @Component({
   selector: 'app-user',
@@ -16,6 +18,7 @@ interface UserType { id: string; avatar: string; name: string }
 })
 export class User {
   @Input({required: true}) users!: UserType;
+  @Input({required: true}) selected!: boolean;
   @Output() select = new EventEmitter<string>();
 
   get imagePath() {

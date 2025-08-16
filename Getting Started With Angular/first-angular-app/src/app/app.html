@@ -4,7 +4,7 @@
         <!-- for older versions of Angular we use *ngFor instead of for and ngIf for if -->
         @for (u of user; track u.id) {
           <li>
-              <app-user [users]="u" (select)="onSelectUser($event)" />
+              <app-user [users]="u" [selected]="u.id === selectedUserId" (select)="onSelectUser($event)" />
           </li>
         }
     </ul>
