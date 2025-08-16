@@ -1,8 +1,8 @@
 <div>
     <button (click)="onSelectedUser()">
-        <img [src]="imagePath" [alt]="name" />
+        <img [src]="imagePath" [alt]="users.name" />
         <!-- property binding -->
-        <span>{{ name }}</span>
+        <span>{{ users.name }}</span>
         <!-- string interpolation -->
     </button>
 </div>
