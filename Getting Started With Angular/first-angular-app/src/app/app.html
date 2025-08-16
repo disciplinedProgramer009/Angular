@@ -1,6 +1,7 @@
 <app-header />
 <main>
     <ul id="users">
+        <!-- for older versions of Angular we use *ngFor instead of for and ngIf for if -->
         @for (u of user; track u.id) {
           <li>
               <app-user [users]="u" (select)="onSelectUser($event)" />
@@ -8,7 +9,7 @@
         }
     </ul>
     @if (selectedUser) {
-        <app-tasks [userName]="selectedUser.name" /> 
+        <app-tasks [userId]="selectedUser.id" [userName]="selectedUser.name" /> 
     }@else {
         <p id="fallback">Please select a user to see their tasks.</p>
     }
