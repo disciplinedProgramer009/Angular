@@ -2,6 +2,7 @@ import { Component, Input, Output } from '@angular/core';
 import { EventEmitter } from '@angular/core';
 import { Task } from "./task/task";
 import { Newtask } from "./new-task/newtask";
+import { NewTaskType } from './task/task.model';
 
 @Component({
   selector: 'app-tasks',
@@ -52,6 +53,15 @@ export class Tasks {
   }
 
   onCancelNewTask() {
+    this.newTask = false;
+  }
+
+  onCreateTask($event: NewTaskType) {
+    this.tasks.unshift({
+      id: Math.random().toString(),
+      userId: this.userId,
+      ...$event
+    });
     this.newTask = false;
   }
 }
