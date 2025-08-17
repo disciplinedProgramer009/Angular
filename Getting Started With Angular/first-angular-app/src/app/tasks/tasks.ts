@@ -1,16 +1,18 @@
 import { Component, Input, Output } from '@angular/core';
 import { EventEmitter } from '@angular/core';
 import { Task } from "./task/task";
+import { Newtask } from "./new-task/newtask";
 
 @Component({
   selector: 'app-tasks',
-  imports: [Task],
+  imports: [Task, Newtask],
   templateUrl: './tasks.html',
   styleUrl: './tasks.css'
 })
 export class Tasks {
   @Input({ required: true }) userId!: string;
   @Input({ required: true }) userName!: string;
+  newTask = false;
   tasks = [
     {
       id: 't1',
@@ -39,5 +41,17 @@ export class Tasks {
 
   get selectedUserTasks() {
     return this.tasks.filter(task => task.userId === this.userId);
+  }
+
+  onCompleteTask(id: string) {
+    this.tasks = this.tasks.filter(task => task.id !== id);
+  }
+
+  onAddTask() {
+    this.newTask = true;
+  }
+
+  onCancelNewTask() {
+    this.newTask = false;
   }
 }
